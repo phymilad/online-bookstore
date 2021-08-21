@@ -1,5 +1,7 @@
 const Joi = require('joi')
 const express = require('express')
+const mongoose = require('mongoose')
+
 const app = express()
 
 app.use(express.json())
@@ -11,6 +13,9 @@ let categories = [
     {_id: "4", name: 'mistery'},
 ]
 
+mongoose.connect('mongodb://localhost/playground')
+    .then(console.log('connected to mongoose...'))
+    .catch(err => console.error('could not connect to mongodb...', err))
 
 app.get('/api/categories', (req,res) => {
     res.send(categories)
